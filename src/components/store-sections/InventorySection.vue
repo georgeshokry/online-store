@@ -1,36 +1,50 @@
 <template>
-    <div class="store-items__main-section-container">
-      <div class="container">
-        <div v-for="(item, index) in  inventoryItems" :key="index" class="row">
-            <div class="mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <!-- product image -->
-                    <div class="col-md-4 p-1">
-                        <img :src="item.image" class="img-fluid w-100" alt="product-image">
-                    </div>
-                    <!-- main item container -->
-                    <div class="col-md-8">
-                        <div class="position-relative">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="card-title">{{item.title}}</h5> <div>${{item.price}}</div>
-                            </div>
-                            <p class="card-text h6">{{item.desc}}</p>
-                            <!-- in case of product available -->
-                            <button v-if="item.status === 'available'" type="button" class="btn btn-secondary btn-sm" >
-                                ADD TO CART
-                            </button>
-                            <!-- otherwise -->
-                            <h3 class="store-items__unavailable-stamp" v-else>
-                                UNAVAILABLE
-                            </h3>
-                        </div>
-                    </div>
+    <div class="mt-3 inventory-section__section-container">
+        <div v-for="(item, index) in inventoryItems" :key="index" class="row">
+            <div class="mb-3">
+              <div class="row no-gutters mb-2">
+                <!-- product title input -->
+                <div class="col">
+                  <div class="form-floating">
+                    <input class="form-control form-control-sm" v-model="item.title" type="text" id="title" >
+                    <label for="title">Title</label>
+                  </div>
                 </div>
+                <!-- price input -->
+                <div class="col">
+                  <div class="form-floating">
+                    <input class="form-control form-control-sm" v-model="item.price" type="number" id="price">
+                    <label for="price">Price</label>
+                  </div>
+                </div>
+                <!-- status input -->
+                <div class="col">
+                  <div class="form-floating">
+                    <select class="form-select form-select-sm" v-model="item.status" id="status">
+                      <option>available</option>
+                      <option>unavailable</option>
+                    </select>
+                    <label for="status">Status</label>
+                  </div>
+                </div>
+              </div>
+              <!-- desc inpu -->
+              <div class="col mb-3">
+                  <div class="form-floating">
+                    <textarea class="form-control inventory-section__desc" v-model="item.desc" id="desc"  rows="8" cols="50"></textarea>
+                    <label for="desc">Description</label>
+                  </div>
+              </div>
+              <!-- image input -->
+              <div class="col">
+                  <div class="form-floating">
+                    <input class="form-control form-control-sm" v-model="item.image" type="text" id="imageUrl">
+                    <label for="imageUrl">Image</label>
+                  </div>
+              </div>
             </div>
-            <!-- to show divider except last item -->
-            <hr v-if="inventoryItems.length - 1 != index">
+            <hr>
         </div>
-      </div>
     </div>
 </template>
 
@@ -108,41 +122,12 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.store-items__product-image{
-    width: 135px;
-    height: 130px;
+.inventory-section__desc{
+  min-height: 100px;
 }
-h5{
-    font-family: 'Blinker', sans-serif;
-}
-.store-items__add-btn{
-    background-color: white;
-    padding: 0 3px;
-    font-size: 12px;
-}
-.store-items__unavailable-stamp {
-  position: absolute;
-  display: inline-block;
-  color: #D82B22;
-  padding: 0 5px;
-  background-color: white;
-  box-shadow:inset 0px 0px 0px 2px #D82B22;
-  transform: rotate(-10deg);
-  top: 40%;
-  width: fit-content;
-}
-
-.store-items__unavailable-stamp:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: lighten;
-}
-.store-items__main-section-container{
-  max-height: 90vh;
+.inventory-section__section-container{
+  max-height: 85vh;
   overflow-x: auto;
+  padding: 0px 20px;
 }
 </style>
