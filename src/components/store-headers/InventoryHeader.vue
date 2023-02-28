@@ -1,4 +1,4 @@
-<template>
+<template functional>
     <div class="pt-3 pr-3 pl-3">
         <p class="h3 text-center store-header__title">
             Inventory

@@ -1,122 +1,59 @@
 <template>
     <div class="mt-3 inventory-section__section-container">
-        <div v-for="(item, index) in inventoryItems" :key="index" class="row">
-            <div class="mb-3">
-              <div class="row no-gutters mb-2">
-                <!-- product title input -->
-                <div class="col">
-                  <div class="form-floating">
-                    <input class="form-control form-control-sm" v-model="item.title" type="text" id="title" >
-                    <label for="title">Title</label>
-                  </div>
-                </div>
-                <!-- price input -->
-                <div class="col">
-                  <div class="form-floating">
-                    <input class="form-control form-control-sm" v-model="item.price" type="number" id="price">
-                    <label for="price">Price</label>
-                  </div>
-                </div>
-                <!-- status input -->
-                <div class="col">
-                  <div class="form-floating">
-                    <select class="form-select form-select-sm" v-model="item.status" id="status">
-                      <option>available</option>
-                      <option>unavailable</option>
-                    </select>
-                    <label for="status">Status</label>
-                  </div>
-                </div>
-              </div>
-              <!-- desc inpu -->
-              <div class="col mb-3">
-                  <div class="form-floating">
-                    <textarea class="form-control inventory-section__desc" v-model="item.desc" id="desc"  rows="8" cols="50"></textarea>
-                    <label for="desc">Description</label>
-                  </div>
-              </div>
-              <!-- image input -->
-              <div class="col">
-                  <div class="form-floating">
-                    <input class="form-control form-control-sm" v-model="item.image" type="text" id="imageUrl">
-                    <label for="imageUrl">Image</label>
-                  </div>
-              </div>
-            </div>
+        <div v-for="(item, index) in ALL_PRODUCTS" :key="index" class="row">
+            <form-inputs :productItem="item" @assignNewValues="saveProduct"/>
             <hr>
         </div>
+        <form-inputs :productItem="productData" @assignNewValues="assignNewValues"/>
+        <button type="button" class="btn btn-secondary" @click="addNewProduct()">Add Product</button>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-
+import FormInputs from './FormInputs.vue'
+import store, { Product } from '@/store'
+import debounce from 'lodash.debounce'
 export default Vue.extend({
+  components: { FormInputs },
   data () {
     return {
-      inventoryItems: [
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'unavailable'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        }
-      ]
+      productData: {
+        title: '',
+        desc: '',
+        image: '',
+        price: 0,
+        status: 'available'
+      } as Product
     }
   },
-
+  computed: {
+    ALL_PRODUCTS () {
+      return store.state.productsList
+    }
+  },
   methods: {
-
+    saveProduct: debounce((newProduct: Product) => {
+      console.log('newProduct', newProduct)
+      // to reduce emitting calls for better performance we need to wait
+      store.dispatch('updateProductById', newProduct)
+    }, 1000),
+    addNewProduct () {
+      store.dispatch('addNewProduct', this.productData)
+      this.resetFormInputs()
+    },
+    assignNewValues (newProduct: Product) {
+      this.productData = newProduct
+    },
+    resetFormInputs () {
+      this.productData = {
+        title: '',
+        desc: '',
+        image: '',
+        price: 0,
+        status: 'available'
+      } as Product
+    }
   }
 })
 </script>

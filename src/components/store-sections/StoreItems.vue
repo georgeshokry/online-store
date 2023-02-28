@@ -1,7 +1,7 @@
 <template>
     <div class="store-items__main-section-container">
       <div class="container">
-        <div v-for="(item, index) in  inventoryItems" :key="index" class="row">
+        <div v-for="(item, index) in  ALL_PRODUCTS" :key="index" class="row">
             <div class="mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <!-- product image -->
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <!-- to show divider except last item -->
-            <hr v-if="inventoryItems.length - 1 != index">
+            <hr v-if="ALL_PRODUCTS.length - 1 != index">
         </div>
       </div>
     </div>
@@ -36,71 +36,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
+import store from '@/store'
 export default Vue.extend({
   data () {
     return {
-      inventoryItems: [
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'unavailable'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        },
-        {
-          image: 'http://uploads.linakis.com/Files/Vue-Dev-Brief/Vue-Dev-Brief-Example-Section1.jpg',
-          title: 'product name',
-          desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been',
-          price: '123',
-          status: 'available'
-        }
-      ]
     }
   },
-
+  computed: {
+    ALL_PRODUCTS () {
+      return store.getters.ALL_PRODUCTS
+    }
+  },
+  mounted () {
+    store.dispatch('readAllProducts')
+  },
   methods: {
 
   }
@@ -142,7 +91,7 @@ h5{
   mix-blend-mode: lighten;
 }
 .store-items__main-section-container{
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-x: auto;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3 store-caret__main-section-container">
+    <div class="mt-3 product-creat__main-section-container">
         <div v-for="(item, index) in caretItems" :key="index" class="row">
             <div class="mb-3" style="max-width: 540px;">
                 <div class="position-relative">
@@ -42,9 +42,8 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.store-caret__main-section-container{
-  max-height: 77vh;
-  overflow-x: clip;
-  overflow-y: auto;
+.product-creat__main-section-container{
+  max-height: 50vh;
+  overflow-x: auto;
 }
 </style>
