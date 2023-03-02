@@ -1,0 +1,35 @@
+{
+  "inventory": {
+    "-NPJpjNEa14nXSd3kqFT": {
+      "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been",
+      "image": "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "key": "-NPJpjNEa14nXSd3kqFT",
+      "price": "123.1235",
+      "status": "available",
+      "title": "Nikon Camera"
+    },
+    "-NPK25hS0ATOySXvoft6": {
+      "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been",
+      "image": "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "key": "-NPK25hS0ATOySXvoft6",
+      "price": "30.57",
+      "status": "available",
+      "title": "Sony"
+    },
+    "-NPZQB1a4mK1mrov0tlZ": {
+      "desc": "asd",
+      "image": "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "price": "123",
+      "status": "available",
+      "title": "test"
+    }
+  },
+  "user": {
+    "caret": {
+      "-NPK25hS0ATOySXvoft6": {
+        "count": 2,
+        "productKey": "-NPK25hS0ATOySXvoft6"
+      }
+    }
+  }
+}
