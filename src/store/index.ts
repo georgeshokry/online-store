@@ -87,12 +87,14 @@ export default new Vuex.Store({
         set(ref(db, 'user/caret/' + caret.productKey), newItem)
       } else {
         commit('ADD_NEW_CARET', caret)
+        // we can imagen that there is a user id
         set(ref(db, 'user/caret/' + caret.productKey), caret)
       }
     },
     readAllCaret ({ commit }) {
       const db = getDatabase()
       const dbRef = ref(db, 'user/caret/')
+      // eslint-disable-next-line
       onValue(dbRef, (snapshot) => {
         const data : Array<Caret> = []
         snapshot.forEach((childSnapshot) => {
