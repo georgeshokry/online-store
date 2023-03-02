@@ -20,14 +20,11 @@ export default Vue.extend({
   components: { FormInputs, ProductCreateHeader },
   data () {
     return {
-      productData: {
-        title: '',
-        desc: '',
-        image: '',
-        price: 0,
-        status: 'available'
-      } as Product
+      productData: {} as Product
     }
+  },
+  mounted () {
+    this.resetFormInputs()
   },
   computed: {
     ALL_PRODUCTS () {
@@ -36,8 +33,7 @@ export default Vue.extend({
   },
   methods: {
     saveProduct: debounce((newProduct: Product) => {
-      console.log('newProduct', newProduct)
-      // to reduce emitting calls for better performance we need to wait
+      // to reduce emitting calls for better performance we need to wait 1 second before send to db
       store.dispatch('updateProductById', newProduct)
     }, 1000),
     addNewProduct () {

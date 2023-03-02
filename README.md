@@ -1,5 +1,9 @@
 # online-store
 
+### Here is the final task 
+#### I have used vuejs v2.6.14, with vuex & firebase for storing data needed
+#### For ui I have used bootstrap v5
+--------
 ## Project setup
 ```
 npm install

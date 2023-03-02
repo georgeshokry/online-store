@@ -73,7 +73,6 @@ export default Vue.extend({
   methods: {
 
     changeFormValue () {
-      console.log('value', this.inventoryItems)
       this.$emit('assignNewValues', this.inventoryItems)
     }
   }

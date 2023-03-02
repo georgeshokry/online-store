@@ -59,7 +59,6 @@ export default new Vuex.Store({
     readAllProducts ({ commit }) {
       const db = getDatabase()
       const dbRef = ref(db, 'inventory/')
-      // eslint-disable-next-line
       onValue(dbRef, (snapshot) => {
         const data : Array<Product> = []
         snapshot.forEach((childSnapshot) => {
@@ -78,7 +77,7 @@ export default new Vuex.Store({
       console.log(state)
       const productIndex = state.caret.findIndex((item) => item.productKey === caret.productKey)
       const db = getDatabase()
-      // this.state.caret.push(caret)
+      // maybe the caret is empty so we need to add new one or edit on exist item in caret
       if (productIndex !== -1) {
         const newItem = {
           productKey: caret.productKey,
@@ -88,14 +87,12 @@ export default new Vuex.Store({
         set(ref(db, 'user/caret/' + caret.productKey), newItem)
       } else {
         commit('ADD_NEW_CARET', caret)
-        // we can imagen that there is a user id
         set(ref(db, 'user/caret/' + caret.productKey), caret)
       }
     },
     readAllCaret ({ commit }) {
       const db = getDatabase()
       const dbRef = ref(db, 'user/caret/')
-      // eslint-disable-next-line
       onValue(dbRef, (snapshot) => {
         const data : Array<Caret> = []
         snapshot.forEach((childSnapshot) => {
