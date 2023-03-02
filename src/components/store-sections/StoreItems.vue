@@ -6,7 +6,7 @@
                 <div class="row no-gutters">
                     <!-- product image -->
                     <div class="col-md-4 p-1">
-                        <img :src="item.image" class="img-fluid w-100" alt="product-image">
+                        <img loading="lazy" :src="item.image" class="img-fluid w-100" alt="product-image">
                     </div>
                     <!-- main item container -->
                     <div class="col-md-8">
@@ -16,7 +16,8 @@
                             </div>
                             <p class="card-text h6">{{item.desc}}</p>
                             <!-- in case of product available -->
-                            <button v-if="item.status === 'available'" type="button" class="btn btn-secondary btn-sm" >
+                            {{item.key}}
+                            <button @click="addToCaret(item.key)" v-if="item.status === 'available'" type="button" class="btn btn-secondary btn-sm" >
                                 ADD TO CART
                             </button>
                             <!-- otherwise -->
@@ -36,7 +37,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import store from '@/store'
+import store, { Caret } from '@/store'
 export default Vue.extend({
   data () {
     return {
@@ -51,7 +52,9 @@ export default Vue.extend({
     store.dispatch('readAllProducts')
   },
   methods: {
-
+    addToCaret (itemKey: string) {
+      store.dispatch('addProductToCaret', { productKey: itemKey, count: 1 } as Caret)
+    }
   }
 })
 </script>

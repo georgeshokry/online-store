@@ -4,6 +4,7 @@
             <form-inputs :productItem="item" @assignNewValues="saveProduct"/>
             <hr>
         </div>
+        <product-create-header />
         <form-inputs :productItem="productData" @assignNewValues="assignNewValues"/>
         <button type="button" class="btn btn-secondary" @click="addNewProduct()">Add Product</button>
     </div>
@@ -14,8 +15,9 @@ import Vue from 'vue'
 import FormInputs from './FormInputs.vue'
 import store, { Product } from '@/store'
 import debounce from 'lodash.debounce'
+import ProductCreateHeader from '@/components/store-headers/ProductCreateHeader.vue'
 export default Vue.extend({
-  components: { FormInputs },
+  components: { FormInputs, ProductCreateHeader },
   data () {
     return {
       productData: {
