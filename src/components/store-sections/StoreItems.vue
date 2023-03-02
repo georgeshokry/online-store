@@ -16,7 +16,6 @@
                             </div>
                             <p class="card-text h6">{{item.desc}}</p>
                             <!-- in case of product available -->
-                            {{item.key}}
                             <button @click="addToCaret(item.key)" v-if="item.status === 'available'" type="button" class="btn btn-secondary btn-sm" >
                                 ADD TO CART
                             </button>
